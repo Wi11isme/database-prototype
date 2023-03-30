@@ -2,7 +2,7 @@
 #define MENU_PRINT
 
 void start_menu();
-char *table_select(int *res);
+void table_select(char *filename, int *res);
 int operate_menu(int oper, char *filename);
 void select(int count_line, char *filename);
 int insert(char *filename);

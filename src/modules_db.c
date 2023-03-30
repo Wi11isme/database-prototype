@@ -10,7 +10,7 @@ void again(int *res, int *depth);
 
 int main() {
     int depth = 1, res = 1, oper = 5;
-    char *filename = NULL;
+    char *filename = malloc(LEN * sizeof(char));
     while (oper != 0) {
         if (depth == 1) {
             start_menu();
@@ -19,7 +19,7 @@ int main() {
             else
                 again(&res, &depth);
         } else if (depth == 2) {
-            filename = table_select(&res);
+            table_select(filename, &res);
             if (!filename)
                 again(&res, &depth);
             else
@@ -33,7 +33,7 @@ int main() {
             again(&res, &depth);
         if (res == 0) printf("n/a");
     }
-    if (filename) free(filename);
+    free(filename);
     return 0;
 }
 

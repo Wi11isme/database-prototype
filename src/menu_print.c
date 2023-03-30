@@ -10,11 +10,10 @@ void start_menu() {
     printf("    0. EXIT\n    1. SELECT\n    2. INSERT\n    3. UPDATE\n    4. DELETE\n");
 }
 
-char* table_select(int* res) {
+void table_select(char* filename, int* res) {
     printf("  Please choose a table:\n");
     printf("    1. Modules\n    2. Levels\n    3. Status events\n");
     int choice;
-    char* filename = malloc(LEN * sizeof(char));
     scanf("%d", &choice);
     if (filename) {
         if (choice == 1)
@@ -27,7 +26,6 @@ char* table_select(int* res) {
             *res = 0;
     } else
         *res = 0;
-    return filename;
 }
 
 int operate_menu(int oper, char* filename) {
