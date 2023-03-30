@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "shared.h"
 #define LEN 100
 
 void start_menu() {
@@ -18,11 +20,11 @@ void table_select(char* filename, int* res) {
         *res = 0;
     else {
         if (filename) {
-            if (choice == 1)
+            if ((int)choice == 1)
                 strcpy(filename, "../materials/master_modules.db");
-            else if (choice == 2)
+            else if ((int)choice == 2)
                 strcpy(filename, "../materials/master_levels.db");
-            else if (choice == 3)
+            else if ((int)choice == 3)
                 strcpy(filename, "../materials/master_status_events.db");
             else
                 *res = 0;
@@ -44,9 +46,14 @@ int operate_menu(int oper, char* filename) {
         if (!insert(filename)) res = 0;
     } else if (oper == 3) {
         printf("  Updated data:\n");
-        select(0, filename);
+        update(filename);
     } else if (oper == 4) {
         printf("  Insert the number of records to delete them.\n");
+        int n = delete (filename);
+        if (n > -1)
+            printf("  Line %d was deleted.", n);
+        else
+            res = 0;
     } else
         res = 0;
     return res;

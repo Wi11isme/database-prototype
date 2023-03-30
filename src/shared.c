@@ -72,3 +72,40 @@ int insert(char* filename) {
     fclose(file);
     return res;
 }
+
+void update(char* filename) { select(0, filename); }
+
+int delete (char* filename) {
+    int res = 1, count = 0;
+    FILE* file = fopen(filename, "w");
+    double line_num;
+    if (scanf("%lf", &line_num) && line_num == (int)line_num && line_num > -1) {
+        if (filename[20] == 'm') {
+            modules line;
+            while (fread(&line, sizeof(modules), 1, file)) {
+                if (count != (int)line_num) {
+                    fseek(file, count * sizeof(modules), SEEK_SET);
+                    fwrite(&line, sizeof(modules), 1, file);
+                }
+                count++;
+            }
+        } else if (filename[20] == 'l') {
+            levels line;
+            while (fread(&line, sizeof(levels), 1, file)) {
+                if (count != (int)line_num) {
+                    fwrite(&line, sizeof(levels), 1, file);
+                }
+            }
+        } else if (filename[20] == 's') {
+            status_events line;
+            while (fread(&line, sizeof(status_events), 1, file)) {
+                if (count != (int)line_num) {
+                    fwrite(&line, sizeof(status_events), 1, file);
+                }
+            }
+        }
+    } else
+        res = -1;
+    if (res != -1) res = line_num;
+    return res;
+}
