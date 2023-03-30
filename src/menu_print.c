@@ -36,7 +36,7 @@ void table_select(char* filename, int* res) {
 int operate_menu(int oper, char* filename) {
     int res = 1, count_line;
     if (oper == 1) {
-        printf("  Insert the number of records or leave empty to output all of them: \n");
+        printf("  Insert the number of records or enter zero to output all of them: \n");
         if (scanf("%d", &count_line) && count_line >= 0) {
             select(count_line, filename);
         } else
