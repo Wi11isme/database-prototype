@@ -49,11 +49,7 @@ int operate_menu(int oper, char* filename) {
         update(filename);
     } else if (oper == 4) {
         printf("  Table was deleted.\n");
-        int n = delete (filename);
-        if (n > -1)
-            printf("  Line %d was deleted.", n);
-        else
-            res = 0;
+        delete (filename);
     } else
         res = 0;
     return res;

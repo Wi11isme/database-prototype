@@ -32,6 +32,6 @@ typedef struct data2 {
 void select(int count_line, char* filename);
 int insert(char* filename);
 void update(char* filename);
-int delete (char* filename);
+void delete (char* filename);
 
 #endif
