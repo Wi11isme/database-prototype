@@ -22,7 +22,7 @@ int main() {
                 again(&res, &depth);
         } else if (depth == 2) {
             table_select(filename, &res);
-            if (!filename)
+            if (!filename || !res)
                 again(&res, &depth);
             else
                 depth = 3;

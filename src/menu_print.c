@@ -13,19 +13,22 @@ void start_menu() {
 void table_select(char* filename, int* res) {
     printf("  Please choose a table:\n");
     printf("    1. Modules\n    2. Levels\n    3. Status events\n");
-    int choice;
-    scanf("%d", &choice);
-    if (filename) {
-        if (choice == 1)
-            strcpy(filename, "../materials/master_modules.db");
-        else if (choice == 2)
-            strcpy(filename, "../materials/master_levels.db");
-        else if (choice == 3)
-            strcpy(filename, "../materials/master_status_events.db");
-        else
-            *res = 0;
-    } else
+    double choice;
+    if (!(scanf("%lf", &choice) && choice == (int)choice))
         *res = 0;
+    else {
+        if (filename) {
+            if (choice == 1)
+                strcpy(filename, "../materials/master_modules.db");
+            else if (choice == 2)
+                strcpy(filename, "../materials/master_levels.db");
+            else if (choice == 3)
+                strcpy(filename, "../materials/master_status_events.db");
+            else
+                *res = 0;
+        } else
+            *res = 0;
+    }
 }
 
 int operate_menu(int oper, char* filename) {
@@ -41,8 +44,10 @@ int operate_menu(int oper, char* filename) {
         if (!insert(filename)) res = 0;
     } else if (oper == 3) {
         printf("  Updated data:\n");
+        select(0, filename);
     } else if (oper == 4) {
         printf("  Insert the number of records to delete them.\n");
-    }
+    } else
+        res = 0;
     return res;
 }
