@@ -9,12 +9,14 @@
 void again(int *res, int *depth);
 
 int main() {
-    int depth = 1, res = 1, oper = 5;
+    int depth = 1, res = 1;
+    double oper = 5;
     char *filename = malloc(LEN * sizeof(char));
     while (oper != 0) {
         if (depth == 1) {
             start_menu();
-            if (scanf("%d", &oper))
+            rewind(stdin);
+            if (scanf("%lf", &oper) && oper == (int)oper)
                 depth = 2;
             else
                 again(&res, &depth);
@@ -25,13 +27,13 @@ int main() {
             else
                 depth = 3;
         } else if (depth == 3) {
-            if (!operate_menu(oper, filename))
+            if (!operate_menu((int)oper, filename))
                 again(&res, &depth);
             else
                 depth = 1;
         } else
             again(&res, &depth);
-        if (res == 0) printf("n/a");
+        if (res == 0 && oper != 0) printf("n/a\n");
     }
     free(filename);
     return 0;
