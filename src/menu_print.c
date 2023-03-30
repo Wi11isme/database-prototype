@@ -48,7 +48,7 @@ int operate_menu(int oper, char* filename) {
         printf("  Updated data:\n");
         update(filename);
     } else if (oper == 4) {
-        printf("  Insert the number of records to delete them.\n");
+        printf("  Table was deleted.\n");
         int n = delete (filename);
         if (n > -1)
             printf("  Line %d was deleted.", n);
